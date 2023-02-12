@@ -1,0 +1,89 @@
+<ng-container *ngIf="courseAdded">
+ <app-success-message [successMessage]="'Course is sucessfully added'"></app-success-message>
+</ng-container>
+
+<ng-container *ngIf="errorMessage">
+    <app-error-message [errorMessage]="errorMessage"></app-error-message>
+</ng-container>
+
+<div class="d-flex justify-content-center mt-lg-3 mb-lg-3 mt-2 mb-2">
+    <h4>Course Details</h4>
+</div>
+
+
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+        <label for="coursename" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input class="form-control" placeholder="Course name" type="text" id="coursename" formControlName="name" />
+            <div
+                *ngIf="!courseForm.get('name')?.valid && (courseForm.get('name')?.dirty || courseForm.get('name')?.touched)">
+                <small id="helpId" *ngIf="courseForm.get('name')?.errors?.['required']" class="text-muted">Name is
+                    required</small>
+                <small id="helpId" *ngIf="courseForm.get('name')?.errors?.['minlength']" class="text-muted">Name
+                    should be minimum of 20 characters</small>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="duration" class="col-sm-2 col-form-label">Duration</label>
+        <div class="col-sm-10">
+            <input class="form-control" placeholder="In minutes" type="number" min="0" id="duration"
+                formControlName="duration" />
+            <div
+                *ngIf="!courseForm.get('duration')?.valid && (courseForm.get('duration')?.dirty || courseForm.get('duration')?.touched)">
+                <small id="helpId" *ngIf="courseForm.get('duration')?.errors?.['required']" class="text-muted">Duration
+                    is
+                    required</small>
+                <small id="helpId" *ngIf="courseForm.get('duration')?.errors?.['min']" class="text-muted">Duration
+                    should be
+                    minimum of 1 minute</small>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="technology" class="col-sm-2 col-form-label">Technology</label>
+        <div class="col-sm-10">
+            <input class="form-control" placeholder="Technology" type="text" id="technology"
+                formControlName="technology" />
+            <div
+                *ngIf="!courseForm.get('technology')?.valid && (courseForm.get('technology')?.dirty || courseForm.get('technology')?.touched)">
+                <small id="helpId" *ngIf="courseForm.get('technology')?.errors?.['required']"
+                    class="text-muted">Technology is
+                    required</small>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" placeholder="Description" id="description"
+                formControlName="description"></textarea>
+            <div
+                *ngIf="!courseForm.get('description')?.valid && (courseForm.get('description')?.dirty || courseForm.get('description')?.touched)">
+                <small id="helpId" *ngIf="courseForm.get('description')?.errors?.['required']"
+                    class="text-muted">Description is
+                    required</small>
+                <small id="helpId" *ngIf="courseForm.get('description')?.errors?.['minlength']"
+                    class="text-muted">Description
+                    should be
+                    minimum of 100 characters</small>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="launchurl" class="col-sm-2 col-form-label">URL</label>
+        <div class="col-sm-10">
+            <input class="form-control" placeholder="Launch URL" type="url" id="launchurl"
+                formControlName="launchurl" />
+            <div
+                *ngIf="!courseForm.get('launchurl')?.valid && (courseForm.get('launchurl')?.dirty || courseForm.get('launchurl')?.touched)">
+                <small id="helpId" *ngIf="courseForm.get('launchurl')?.errors?.['required']" class="text-muted">Launch
+                    URL is
+                    required</small>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center"><button class="btn btn-primary" [disabled]="!courseForm.valid"
+            type="submit">Add Course</button></div>
+</form>

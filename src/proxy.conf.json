@@ -1,0 +1,14 @@
+{
+    "/api/v1.0/lms/courses/": {
+        "target": "https://localhost:8091",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/api/v1.0/lms/users/": {
+        "target": "https://localhost:8092",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

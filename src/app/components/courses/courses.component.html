@@ -1,0 +1,68 @@
+<div class="container">
+
+    <ng-container *ngIf="filterErrorMessage">
+        <app-error-message [errorMessage]="filterErrorMessage"></app-error-message>
+    </ng-container>
+
+    <form (ngSubmit)="onSubmit(filterForm)" #filterForm="ngForm">
+        <div class="row m-2">
+            <div class="col-sm-5">
+                <label class="col-form-label ms-1">Technology</label>
+                <input type="text" class="form-control m-1" id="technology" name="technology" placeholder="Technology"
+                    [(ngModel)]="technology" />
+            </div>
+            <div class="col-sm-5">
+                <label class="col-form-label ms-1">Duration Range</label>
+                <input type="number" class="form-control m-1" name="durationFrom" id="durationFrom" placeholder="From"
+                    [(ngModel)]="durationFrom" />
+                <input type="number" class="form-control m-1" name="durationTo" id="durationFrom" placeholder="To"
+                    [(ngModel)]="durationTo" />
+            </div>
+            <div class="d-flex flex-sm-column align-items-start justify-content-center col-sm-2 p-2">
+                <button class="btn btn-primary m-2" type="submit">Get Courses</button>
+                <button class="btn btn-outline-dark m-2" type="button" (click)="onClear()">Clear</button>
+            </div>
+        </div>
+    </form>
+    <hr>
+
+    <ng-container *ngIf="courseDeleted">
+        <app-success-message [successMessage]="'Course is sucessfully deleted'"></app-success-message>
+       </ng-container>
+       
+       <ng-container *ngIf="errorMessage">
+           <app-error-message [errorMessage]="errorMessage"></app-error-message>
+       </ng-container>
+
+
+
+    <ng-container *ngIf="coursesList.length > 0">
+        <table class="table">
+            <ng-container *ngFor="let course of coursesList; let i = index">
+                <tr class="row m-2 m-sm-3 p-1 p-sm-3 course-list-border">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <span class="course-name">{{course.name}}</span>
+                            <span class="course-duration ps-2">{{course.duration | duration}}</span>
+                        </div>
+                        <div>
+                            <button class="button-link" (click)="onDelete(course, i)">Delete</button>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <span class="course-technology">{{course.technology}}</span><span class="technology-text p-0">(Technology)</span>
+                    </div>
+                    <div>
+                        <p class="course-description m-0">{{course.description}}</p>
+                    </div>
+                    <div>
+                        <a class="course-launch-url" href="{{course.launch_url}}" target="_blank">{{course.launch_url}}</a>
+                    </div>
+                </tr>
+            </ng-container>
+        </table>
+    </ng-container>
+    <ng-container *ngIf="coursesList.length == 0 && isCoursesFetched">
+        <div class="text-message text-center p-sm-5 p-2">No Courses Found</div>
+    </ng-container>
+</div>
