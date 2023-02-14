@@ -20,4 +20,11 @@ describe('ErrorMessageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show the error message', ()=> {
+    component.errorMessage = 'Testing Error Message';
+    fixture.detectChanges();
+    const span = fixture.nativeElement.querySelector('span');
+    expect(span.textContent).toContain(component.errorMessage);
+  });
 });

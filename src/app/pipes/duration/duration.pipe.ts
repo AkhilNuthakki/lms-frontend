@@ -8,7 +8,7 @@ export class DurationPipe implements PipeTransform {
   transform(durationInMinutes: number){
     if (durationInMinutes) {
       if (durationInMinutes <= 60) {
-        return durationInMinutes + 'mins';
+        return durationInMinutes + ' mins';
       } else {
         const min = durationInMinutes % 60;
         durationInMinutes = durationInMinutes - min;

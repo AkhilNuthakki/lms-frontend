@@ -1,16 +1,24 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CourseService } from './services/course/course.service';
+import { UserService } from './services/user/user.service';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule,
+        ReactiveFormsModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, HeaderComponent
       ],
+      providers: [ UserService, CourseService ]
     }).compileComponents();
   });
 
@@ -26,10 +34,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('lms-usecase-frontend');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('lms-usecase-frontend app is running!');
-  });
 });

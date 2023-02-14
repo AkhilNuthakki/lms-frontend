@@ -20,4 +20,11 @@ describe('SuccessMessageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show the success message', ()=> {
+    component.successMessage = 'Testing Success Message';
+    fixture.detectChanges();
+    const h5 = fixture.nativeElement.querySelector('h5');
+    expect(h5.textContent).toContain(component.successMessage);
+  });
 });
