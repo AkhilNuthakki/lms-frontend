@@ -11,12 +11,14 @@ export class HeaderComponent implements OnInit{
 
   
   isAuth: boolean = false;
+  isAdmin: boolean = false;
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
       this.userService.getUser().subscribe({ next : (user) => {
         if(user){
           this.isAuth = true;
+          this.isAdmin = user.user_role == 'ADMIN' ? true : false;
         }
       }
       });

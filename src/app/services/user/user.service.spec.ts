@@ -23,7 +23,13 @@ describe('UserService', () => {
   });
 
   it('should authenticate user when logged in', (done: DoneFn) => {
-    const responseData: string = 'User Authenticated';
+    const responseData = {
+      user_email_id: 'akhil.nuthakki1@gmail.com',
+      user_name: 'AkhilNuthakki',
+      user_role: 'ADMIN',
+      token: '',
+      token_expiration_date: new Date()
+    };
     const reqbody = {
       user_email_id: 'akhil.nuthakki1@gmail.com',
       password: 'Pass2022'

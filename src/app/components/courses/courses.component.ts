@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Course } from 'src/app/interfaces/CourseResponse';
 import { CourseService } from 'src/app/services/course/course.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-courses',
@@ -18,8 +19,9 @@ export class CoursesComponent implements OnInit {
   courseDeleted: boolean = false;
   errorMessage: string | undefined;
   filterErrorMessage: string | undefined;
+  isAdmin: boolean = false;
 
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.durationFrom = undefined;
@@ -29,6 +31,12 @@ export class CoursesComponent implements OnInit {
     this.courseDeleted = false;
     this.errorMessage = undefined;
     this.filterErrorMessage = undefined;
+    this.userService.getUser().subscribe({ next : (user) => {
+      if(user){;
+        this.isAdmin = user.user_role == 'ADMIN' ? true : false;
+      }
+    }
+    });
   }
 
   onSubmit(form: NgForm) {

@@ -19,7 +19,7 @@ export class UserService {
   }
 
   loginUser(requestbody: LoginUserRequest): Observable<any> {
-    return this.http.post('/api/v1.0/lms/users/login', requestbody, {responseType: 'text'});
+    return this.http.post('/api/v1.0/lms/users/login', requestbody, {responseType: 'json'});
   }
 
   setUser(user: User | undefined){

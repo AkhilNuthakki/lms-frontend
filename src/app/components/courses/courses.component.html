@@ -45,7 +45,7 @@
                             <span id="course-name" class="course-name">{{course.name}}</span>
                             <span class="course-duration ps-2">{{course.duration | duration}}</span>
                         </div>
-                        <div>
+                        <div *ngIf="isAdmin">
                             <button class="button-link" (click)="onDelete(course, i)">Delete</button>
                         </div>
                     </div>

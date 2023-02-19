@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit{
     const requestBody = new LoginUserRequest(this.loginForm.value.useremail, this.loginForm.value.password);
 
     this.userService.loginUser(requestBody).subscribe({
-      next: () => {
-        this.user = new User(this.loginForm.value.useremail);
+      next: (user) => {
+        this.user = user;
         this.userService.setUser(this.user);
         this.router.navigate(['/courses']);
       }, error: (error) => {
